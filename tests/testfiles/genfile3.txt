@@ -1,0 +1,12 @@
+First line in file 3.
+Second line in file 3.
+Third line in file 3.
+Fourth line in file 3.
+Fifth line in file 3.
+Sixth line in file 3.
+Seventh line in file 3.
+Eighth line in file 3.
+Ninth line in file 3.
+Tenth line in file 3.
+Eleventh line in file 3.
+Twelfth line in file 3.

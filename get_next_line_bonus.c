@@ -57,35 +57,67 @@ char	*handle_content(char *line)
 	return (tmp_remains);
 }
 
-t_fd_store	*get_fd_store(int fd, t_fd_store fd_store_array[])
+// func to find the now-operating-on-fd element of the list
+t_fd_cs	*get_fd_store(int fd, t_fd_cs **head)
 {
-	int	i;
+	t_fd_cs	*current;
 
-	i = 0;
-	while (i < 100)
+	if (!*head)
 	{
-		if (fd_store_array[i].fd == fd)
-			return (&fd_store_array[i]);
-		if (fd_store_array[i].fd == -1)
-		{
-			fd_store_array[i].fd = fd;
-			return (&fd_store_array[i]);
-		}
-		i++;
+		current = malloc(sizeof(t_fd_cs));
+		if (!current)
+			return (NULL);
+		*current = (t_fd_cs){fd, NULL, NULL};
+		*head = current;
+		return (current);
 	}
-	return (NULL);
+	current = *head;
+	while (current)
+	{
+		if (current->fd == fd)
+			return (current);
+		current = current->next;
+	}
+	current = malloc(sizeof(t_fd_cs));
+	if (!current)
+		return (NULL);
+	*current = (t_fd_cs){fd, NULL, *head};
+	*head = current;
+	return (current);
+}
+
+void	delete_fd_node(t_fd_cs **head, int fd)
+{
+	t_fd_cs	*prev = NULL;
+	t_fd_cs	*current = *head;
+
+	while (current)
+	{
+		if (current->fd == fd)
+		{
+			if (prev)
+				prev->next = current->next;
+			else
+				*head = current->next;
+			free(current->content);
+			free(current);
+			return;
+		}
+		prev = current;
+		current = current->next;
+	}
 }
 
 char	*get_next_line(int fd)
 {
-	static t_fd_store	fd_store_array[100] = {{-1, NULL}};
-	t_fd_store			*fd_store;
+	static t_fd_cs	*fd_store_list = NULL;
+	t_fd_cs			*content_storage;
 	char				*buf;
 	char				*line;
 	char				*tmp_remains;
 
-	fd_store = get_fd_store(fd, fd_store_array);
-	if (!fd_store)
+	content_storage = get_fd_store(fd, &fd_store_list);
+	if (!content_storage)
 		return (NULL);
 	line = NULL;
 	buf = NULL;
@@ -93,13 +125,13 @@ char	*get_next_line(int fd)
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
-	fd_store->content = read_file(fd, buf, fd_store->content);
+	content_storage->content = read_file(fd, buf, content_storage->content);
 	free(buf);
-	if (!fd_store->content || *fd_store->content == '\0')
+	if (!content_storage->content || *content_storage->content == '\0')
 		return (NULL);
-	line = ft_strdup(fd_store->content);
+	line = ft_strdup(content_storage->content);
 	tmp_remains = handle_content(line);
-	free(fd_store->content);
-	fd_store->content = tmp_remains;
+	free(content_storage->content);
+	content_storage->content = tmp_remains;
 	return (line);
 }

@@ -22,11 +22,13 @@
 #  define BUFFER_SIZE 1
 # endif
 
-typedef struct s_fd_store
+// a structure built to effectively store multiple fd's in one array
+typedef struct s_fd_content_storage
 {
 	int		fd;
 	char	*content;
-}			t_fd_store;
+	void	*next;
+}			t_fd_cs;
 
 char		*get_next_line(int fd);
 size_t		ft_strlen(const char *str);
