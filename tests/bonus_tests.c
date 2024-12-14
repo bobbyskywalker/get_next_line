@@ -2,14 +2,14 @@
 
 void bonus_tests()
 {
-    int fd1 = open("testfile_basic.txt", O_RDONLY);
-    int fd2 = open("testfile_big.txt", O_RDONLY);
-    int fd3 = open("generated_file.txt", O_RDONLY);
-    int fd4 = open("gen_file2.txt", O_RDONLY);
-    int fd5 = open("genfile3.txt", O_RDONLY);
-    int fd6 = open("genfile4.txt", O_RDONLY);
-    int fd7 = open("largefile.txt", O_RDONLY);
-    int fd8 = open("oneliner.txt", O_RDONLY);
+    int fd1 = open("testfiles/testfile_basic.txt", O_RDONLY);
+    int fd2 = open("testfiles/testfile_big.txt", O_RDONLY);
+    int fd3 = open("testfiles/generated_file.txt", O_RDONLY);
+    int fd4 = open("testfiles/gen_file2.txt", O_RDONLY);
+    int fd5 = open("testfiles/genfile3.txt", O_RDONLY);
+    int fd6 = open("testfiles/genfile4.txt", O_RDONLY);
+    int fd7 = open("testfiles/largefile.txt", O_RDONLY);
+    int fd8 = open("testfiles/oneliner.txt", O_RDONLY);
     for (int i = 0; i < 100000; i++)
     {
         if (!i)

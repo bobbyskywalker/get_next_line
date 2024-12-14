@@ -2,21 +2,21 @@
 
 int mandatory_tests()
 {
-    int fd = open("testfile_basic.txt", O_RDONLY);
+    int fd = open("testfiles/testfile_basic.txt", O_RDONLY);
     for (int i = 0; i < 4; i++)
         printf("%s\n", get_next_line(fd));
     close(fd);
 
-    fd = open("oneliner.txt", O_RDONLY);
+    fd = open("testfiles/oneliner.txt", O_RDONLY);
     printf("%s\n", get_next_line(fd));
     close(fd);
 
-    fd = open("testfile_big.txt", O_RDONLY);
+    fd = open("testfiles/testfile_big.txt", O_RDONLY);
     for (int i = 0; i < 80; i++)
         printf("%s\n", get_next_line(fd));
     close(fd);
 
-    fd = open("largefile.txt", O_RDONLY);
+    fd = open("testfiles/largefile.txt", O_RDONLY);
     for (int i = 0; i < 100000; i++)
         printf("%s\n", get_next_line(fd));
     close(fd);
