@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 13:51:56 by agarbacz          #+#    #+#             */
-/*   Updated: 2024/12/13 15:47:19 by agarbacz         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:50:25 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ char	*get_next_line(int fd)
 	content_storage = read_file(fd, buf, content_storage);
 	free(buf);
 	if (!content_storage || *content_storage == '\0')
+	{
+		free(content_storage);
 		return (NULL);
+	}
 	line = ft_strdup(content_storage);
 	tmp_remains = handle_content(line);
 	free(content_storage);

@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:55:57 by agarbacz          #+#    #+#             */
-/*   Updated: 2024/12/13 17:11:07 by agarbacz         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:51:29 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #  define BUFFER_SIZE 1
 # endif
 
-// a structure built to effectively store multiple fd's in one array
+// a node structure built to effectively store multiple fd's (sll)
 typedef struct s_fd_content_storage
 {
 	int		fd;

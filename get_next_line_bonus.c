@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 13:51:56 by agarbacz          #+#    #+#             */
-/*   Updated: 2024/12/13 17:10:39 by agarbacz         ###   ########.fr       */
+/*   Created: 2024/12/16 18:00:46 by agarbacz          #+#    #+#             */
+/*   Updated: 2024/12/16 18:02:35 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,11 @@ t_fd_cs	*get_fd_store(int fd, t_fd_cs **head)
 
 void	delete_fd_node(t_fd_cs **head, int fd)
 {
-	t_fd_cs	*prev = NULL;
-	t_fd_cs	*current = *head;
+	t_fd_cs	*prev;
+	t_fd_cs	*current;
 
+	prev = NULL;
+	current = *head;
 	while (current)
 	{
 		if (current->fd == fd)
@@ -101,7 +103,7 @@ void	delete_fd_node(t_fd_cs **head, int fd)
 				*head = current->next;
 			free(current->content);
 			free(current);
-			return;
+			return ;
 		}
 		prev = current;
 		current = current->next;
@@ -112,23 +114,24 @@ char	*get_next_line(int fd)
 {
 	static t_fd_cs	*fd_store_list = NULL;
 	t_fd_cs			*content_storage;
-	char				*buf;
-	char				*line;
-	char				*tmp_remains;
+	char			*buf;
+	char			*line;
+	char			*tmp_remains;
 
 	content_storage = get_fd_store(fd, &fd_store_list);
 	if (!content_storage)
 		return (NULL);
 	line = NULL;
-	buf = NULL;
-	tmp_remains = NULL;
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
 	content_storage->content = read_file(fd, buf, content_storage->content);
 	free(buf);
 	if (!content_storage->content || *content_storage->content == '\0')
+	{
+		delete_fd_node(&fd_store_list, fd);
 		return (NULL);
+	}
 	line = ft_strdup(content_storage->content);
 	tmp_remains = handle_content(line);
 	free(content_storage->content);
