@@ -92,3 +92,20 @@ char	*get_next_line(int fd)
 	content_storage = tmp_remains;
 	return (line);
 }
+
+// int main()
+// {
+// 	int fd = open("tests/testfiles/testfile_basic.txt", O_RDONLY);
+// 	char *line;
+
+// 	if (fd < 0)
+// 		return (1);
+
+// 	while ((line = get_next_line(fd)) != NULL)
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 	}
+// 	close(fd);
+// 	return (0);
+// }
