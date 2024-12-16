@@ -40,6 +40,7 @@ char	*read_file(int fd, char *buf, char *content_storage)
 	return (content_storage);
 }
 
+// free if the substr is empty (line 61)
 char	*handle_content(char *line)
 {
 	int		i;
@@ -53,9 +54,17 @@ char	*handle_content(char *line)
 	if (line[i] == '\0')
 		return (NULL);
 	tmp_remains = ft_substr(line, i + 1, ft_strlen(line) - i - 1);
+	if (!tmp_remains)
+		return (NULL);
+	if (tmp_remains[0] == '\0')
+	{
+		free(tmp_remains);
+		return (NULL);
+	}
 	line[i + 1] = '\0';
 	return (tmp_remains);
 }
+
 
 char	*get_next_line(int fd)
 {
