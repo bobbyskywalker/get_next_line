@@ -6,7 +6,7 @@
 /*   By: agarbacz <agarbacz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 13:51:56 by agarbacz          #+#    #+#             */
-/*   Updated: 2024/12/16 17:50:25 by agarbacz         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:08:47 by agarbacz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ char	*handle_content(char *line)
 	return (tmp_remains);
 }
 
-
 char	*get_next_line(int fd)
 {
 	static char	*content_storage = NULL;
@@ -95,7 +94,7 @@ char	*get_next_line(int fd)
 
 // int main()
 // {
-// 	int fd = open("tests/testfiles/testfile_basic.txt", O_RDONLY);
+// 	int fd = open("tests/testfiles/testfile_big.txt", O_RDONLY);
 // 	char *line;
 
 // 	if (fd < 0)
