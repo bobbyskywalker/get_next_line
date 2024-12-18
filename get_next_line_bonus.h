@@ -22,7 +22,7 @@
 #  define BUFFER_SIZE 1
 # endif
 
-// a node structure built to effectively store multiple fd's (sll)
+// an sll node structure built to effectively store multiple fd's and their contents
 typedef struct s_fd_content_storage
 {
 	int		fd;

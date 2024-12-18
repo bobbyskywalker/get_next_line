@@ -40,7 +40,6 @@ char	*read_file(int fd, char *buf, char *content_storage)
 	return (content_storage);
 }
 
-// free if the substr is empty (line 61)
 char	*handle_content(char *line)
 {
 	int		i;
@@ -91,20 +90,3 @@ char	*get_next_line(int fd)
 	content_storage = tmp_remains;
 	return (line);
 }
-
-// int main()
-// {
-// 	int fd = open("tests/testfiles/testfile_big.txt", O_RDONLY);
-// 	char *line;
-
-// 	if (fd < 0)
-// 		return (1);
-
-// 	while ((line = get_next_line(fd)) != NULL)
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }

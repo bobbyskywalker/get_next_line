@@ -93,8 +93,7 @@ t_fd_cs	*get_fd_store(int fd, t_fd_cs **head)
 	return (current);
 }
 
-// the fix was "nullyfing the ptr"
-char	*delete_fd_node(t_fd_cs **head, int fd)
+char	*delete_node(t_fd_cs **head, int fd)
 {
 	t_fd_cs	*prev;
 	t_fd_cs	*current;
@@ -137,7 +136,7 @@ char	*get_next_line(int fd)
 	content_storage->content = read_file(fd, buf, content_storage->content);
 	free(buf);
 	if (!content_storage->content)
-		return (delete_fd_node(&fd_store_list, fd));
+		return (delete_node(&fd_store_list, fd));
 	line = ft_strdup(content_storage->content);
 	tmp_remains = handle_content(line);
 	free(content_storage->content);
@@ -146,42 +145,3 @@ char	*get_next_line(int fd)
 		free(line);
 	return (line);
 }
-
-// int	main(void)
-// {
-// 	int		fd, fd1, fd2;
-// 	char	*line, *line1, *line2;
-
-// 	fd = open("tests/testfiles/testfile_basic.txt", O_RDONLY);
-// 	fd1 = open("tests/testfiles/testfile_big.txt", O_RDONLY);
-// 	fd2 = open("tests/testfiles/genfile3.txt", O_RDONLY);
-// 	if (fd < 0 || fd1 < 0 || fd2 < 0)
-// 		return (1);
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		line1 = get_next_line(fd1);
-// 		line2 = get_next_line(fd2);
-// 		if (!line && !line1 && !line2)
-// 			break ;
-// 		if (line)
-// 		{
-// 			printf("%s", line);
-// 			free(line);
-// 		}
-// 		if (line1)
-// 		{
-// 			printf("%s", line1);
-// 			free(line1);
-// 		}
-// 		if (line2)
-// 		{
-// 			printf("%s", line2);
-// 			free(line2);
-// 		}
-// 	}
-// 	close(fd);
-// 	close(fd1);
-// 	close(fd2);
-// 	return (0);
-// }
