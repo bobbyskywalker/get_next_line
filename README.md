@@ -61,14 +61,14 @@ int main(void)
     fd2 = open("file2.txt", O_RDONLY);
     fd3 = open("file3.txt", O_RDONLY);
     
-    if (fd < 0 || fd1 < 0 || fd2 < 0)
+    if (fd1 < 0 || fd2 < 0 || fd3 < 0)
         return (1);
 
     while (1)
     {
-        line = get_next_line(fd);
-        line1 = get_next_line(fd1);
-        line2 = get_next_line(fd2);
+        line = get_next_line(fd1);
+        line1 = get_next_line(fd2);
+        line2 = get_next_line(fd3);
         
         // Break the loop when all file descriptors reach the end
         if (!line && !line1 && !line2)
@@ -90,9 +90,9 @@ int main(void)
             free(line2);
         }
     }
-    close(fd);
     close(fd1);
     close(fd2);
+    close(fd3);
 
     return (0);
 }
